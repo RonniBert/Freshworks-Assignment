@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style media="screen">
+        input,button{
+            padding: 7px;
+            height: 40px;
+        }
+        fieldset{
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h2 id="title">Local Storage of Data</h2>
+    <fieldset>
+        <legend>Create Data</legend>
+        <input id="inpKey" type="text" placeholder="Enter the Key here">
+        <input id="inpValue" type="text" placeholder="Enter the Value here">
+        <button type="button" id="btnCreate">Create Data</button>
+        
+    </fieldset>
+    <fieldset>
+        <legend>Local Storage Data</legend>
+        <div id="lsOutput"></div>
+    </fieldset>
+    <br>
+    <br>
+    <button type="button" id="read_all">Read all Data</button>
+    <br>
+    <br>
+    <br>
+        <button type="button" id="del_all">Delete Data</button>
+</body>
+<script type="text/javascript">
+    const inpKey=document.getElementById("inpKey");
+    const inpValue=document.getElementById("inpValue");
+    const btnCreate=document.getElementById("btnCreate");
+    const lsOutput=document.getElementById("lsOutput");
+    const read_all=document.getElementById("read_all");
+    const del_all=document.getElementById("del_all");
+
+
+    btnCreate.onclick=function(){
+        const key=inpKey.value;
+        const value=inpValue.value;
+
+        if(key&&value){
+            localStorage.setItem(key,value);
+            location.reload();
+        }
+    };
+
+    read_all.onclick=function(){
+        var keys=Object.keys(localStorage);
+        console.log(keys);
+
+        for(var key of keys){
+            console.log("Key : "+keys+" ,Value : "+localStorage.getItem(key));
+        }
+    };
+
+    for(let i=0;i<localStorage.length;i++){
+        const key=localStorage.key(i);
+        const value=localStorage.getItem(key);
+
+        lsOutput.innerHTML+=`${key}: ${value}<br />`
+    }
+
+    del_all.onclick=function(){
+        localStorage.removeItem("age");
+    }
+</script>
+</html> 
